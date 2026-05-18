@@ -1,0 +1,9 @@
+id: note
+name: Quick Study Notes Generator
+
+steps:
+  - id: generate
+    prompt_file: note_promt.md
+    description: "Generate complete study notes for [TOPIC]"
+    reads: []
+    writes: note

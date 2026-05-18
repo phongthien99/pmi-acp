@@ -1,0 +1,28 @@
+name: mcp-workbench
+
+services:
+  mcp-workbench:
+    image: phongthien/mcp-workbench:latest
+    ports:
+      - "${MCP_PORT:-8100}:8099"
+      - "${API_PORT:-8110}:8110"
+      - "${HUGO_PORT:-1313}:1313"
+    environment:
+      MCP_TRANSPORT: sse
+      MCP_PORT: 8099
+      MCP_NAME: ${MCP_NAME:-mcp-workbench}
+      MCP_VERSION: ${MCP_VERSION:-1.0.0}
+      API_PORT: 8110
+      DOCS_ROOT: /hugo-src/content/docs
+      PROJECTS_ROOT: /hugo-src/content/docs/projects
+    volumes:
+      - ./workflows:/hugo-src/content/docs/workflows
+      - ./prompts:/hugo-src/content/docs/prompts/source
+      - ./projects:/hugo-src/content/docs/projects
+    restart: always
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8099/sse"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
