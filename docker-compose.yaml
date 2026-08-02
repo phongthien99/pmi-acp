@@ -20,9 +20,9 @@ services:
       - ./prompts:/hugo-src/content/docs/prompts/source
       - ./projects:/hugo-src/content/docs/projects
     restart: always
-    healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost:8099/sse"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-      start_period: 15s
+    # healthcheck:
+    #   test: ["CMD", "wget", "-qO-", "http://localhost:8099/sse"]
+    #   interval: 30s
+    #   timeout: 5s
+    #   retries: 3
+    #   start_period: 15s
